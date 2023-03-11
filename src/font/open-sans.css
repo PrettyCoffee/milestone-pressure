@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
   font-stretch: 100%;
   font-display: swap;
-  src: url(./OpenSans-Regular.ttf) format('truetype');
+  src: url(./OpenSans-Regular.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
   font-stretch: 100%;
   font-display: swap;
-  src: url(./OpenSans-SemiBold.ttf) format('truetype');
+  src: url(./OpenSans-SemiBold.ttf) format("truetype");
 }

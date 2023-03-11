@@ -1,4 +1,8 @@
-import { getDateSegments, DateSegmentName, DateSegments } from "./getDateSegments"
+import {
+  getDateSegments,
+  DateSegmentName,
+  DateSegments,
+} from "./getDateSegments"
 
 const HOUR_IN_MILLISECONDS = 1000 * 60 * 60
 const WARNING = 8 * HOUR_IN_MILLISECONDS
@@ -10,7 +14,7 @@ const elements: Record<DateSegmentName | "timer", HTMLElement | null> = {
   seconds: document.getElementById("seconds"),
   milliseconds: document.getElementById("milliseconds"),
 
-  timer: document.getElementsByClassName("timer")[0] as HTMLElement | null
+  timer: document.getElementsByClassName("timer")[0] as HTMLElement | null,
 }
 
 const stringPad: Record<DateSegmentName, number> = {
@@ -18,7 +22,7 @@ const stringPad: Record<DateSegmentName, number> = {
   hours: 2,
   minutes: 2,
   seconds: 2,
-  milliseconds: 3
+  milliseconds: 3,
 }
 
 const formatTimeSegment = (diff: DateSegments, key: DateSegmentName) => {
@@ -27,34 +31,32 @@ const formatTimeSegment = (diff: DateSegments, key: DateSegmentName) => {
 }
 
 const updateTime = (diff: DateSegments) =>
-  Object.keys(diff).forEach(
-    (_) => {
-      const key = _ as DateSegmentName
-      const segment = elements[key]
-      if(!segment) return
+  Object.keys(diff).forEach(_ => {
+    const key = _ as DateSegmentName
+    const segment = elements[key]
+    if (!segment) return
 
-      const currentText = segment.innerText
-      const newText = formatTimeSegment(diff, key)
+    const currentText = segment.innerText
+    const newText = formatTimeSegment(diff, key)
 
-      if (currentText !== newText) {
-        segment.innerText = formatTimeSegment(diff, key)
-      }
+    if (currentText !== newText) {
+      segment.innerText = formatTimeSegment(diff, key)
     }
-  )
+  })
 
 export const initTimer = (deadline: Date) => {
   const interval = setInterval(() => {
     const diff = deadline.valueOf() - Date.now()
     const parsedDiff = getDateSegments(diff)
     updateTime(parsedDiff)
-  
-    if(diff <= WARNING) {
+
+    if (diff <= WARNING) {
       const timerStyle = elements.timer?.style
-      if(timerStyle?.getPropertyValue("color") === "")
-        timerStyle?.setProperty("color", "var(--red)") 
+      if (timerStyle?.getPropertyValue("color") === "")
+        timerStyle.setProperty("color", "var(--red)")
     }
-  
-    if(diff <= 0) {
+
+    if (diff <= 0) {
       clearInterval(interval)
       document.title = "💥 KABOOM 💥"
     }

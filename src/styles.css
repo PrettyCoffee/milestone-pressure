@@ -38,7 +38,7 @@ body {
   background-color: var(--base);
   color: var(--text);
   font-size: 1rem;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
 
   display: flex;
   justify-content: center;
