@@ -1,21 +1,36 @@
 import { DateSegmentName } from "./getDateSegments"
 
+const stringPad: Record<DateSegmentName, number> = {
+  days: 1,
+  hours: 2,
+  minutes: 2,
+  seconds: 2,
+  milliseconds: 3,
+}
+
+const formatTimeSegment = (value: number, key: DateSegmentName) =>
+  String(Math.max(0, value)).padStart(stringPad[key], "0")
+
 type DateTimerProps = Pick<
   DateTimer,
   "days" | "hours" | "minutes" | "seconds" | "milliseconds"
 >
 
+const renderSegment = (value: number, key: DateSegmentName) => `
+  <span class="segment ${key}">${formatTimeSegment(value, key)}</span>
+`
+
 const renderHtml = (props: DateTimerProps) => `
   <div class="timer">
-    <span class="segment days">${props.days}</span>
+    ${renderSegment(props.days, "days")}
     <span class="delimiter">d</span>
-    <span class="segment hours">${props.hours}</span>
+    ${renderSegment(props.hours, "hours")}
     <span class="delimiter blink">:</span>
-    <span class="segment minutes">${props.minutes}</span>
+    ${renderSegment(props.minutes, "minutes")}
     <span class="delimiter blink">:</span>
-    <span class="segment seconds">${props.seconds}</span>
+    ${renderSegment(props.seconds, "seconds")}
     <span class="delimiter blink">.</span>
-    <span class="segment milliseconds">${props.milliseconds}</span>
+    ${renderSegment(props.milliseconds, "milliseconds")}
   </div>
 `
 
@@ -45,17 +60,6 @@ const styles = `
     color: var(--overlay0);
   }
 `
-
-const stringPad: Record<DateSegmentName, number> = {
-  days: 1,
-  hours: 2,
-  minutes: 2,
-  seconds: 2,
-  milliseconds: 3,
-}
-
-const formatTimeSegment = (value: number, key: DateSegmentName) =>
-  String(Math.max(0, value)).padStart(stringPad[key], "0")
 
 export class DateTimer extends HTMLElement {
   public days: number
