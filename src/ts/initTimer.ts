@@ -1,9 +1,6 @@
 import { DateTimer } from "./DateTimer"
-import {
-  getDateSegments,
-  DateSegmentName,
-  DateSegments,
-} from "./getDateSegments"
+import { getDateSegments, DateSegments } from "./getDateSegments"
+import { keysOf } from "./utils"
 
 const HOUR_IN_MILLISECONDS = 1000 * 60 * 60
 const WARNING = 8 * HOUR_IN_MILLISECONDS
@@ -11,15 +8,9 @@ const WARNING = 8 * HOUR_IN_MILLISECONDS
 const timer = document.getElementById("timer") as DateTimer
 
 const updateTime = (diff: DateSegments) =>
-  Object.keys(diff).forEach(_ => {
-    const key = _ as DateSegmentName
-
-    const currentValue = timer[key]
-    const newValue = diff[key]
-
-    if (currentValue !== newValue) {
-      timer.setAttribute(key, String(newValue))
-    }
+  keysOf(diff).forEach(key => {
+    const newValue = String(diff[key])
+    timer.setAttribute(key, newValue)
   })
 
 export const initTimer = (deadline: Date) => {
