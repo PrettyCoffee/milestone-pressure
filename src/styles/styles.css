@@ -1,11 +1,13 @@
 @import "./catppuccin.css";
 @import "../font/open-sans.css";
 
-.label {
+.timer-wrapper > .label {
+  margin: 0 auto;
   font-size: 2rem;
   color: var(--rosewater);
   padding: 0 2rem 0.5rem 2rem;
   border-bottom: 1px solid var(--overlay0);
+  width: max-content;
 }
 
 body {
