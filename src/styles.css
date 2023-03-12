@@ -1,36 +1,11 @@
 @import "./catppuccin.css";
 @import "./font/open-sans.css";
 
-@keyframes blink-animation {
-  50% {
-    opacity: 1;
-  }
-  65% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .label {
   font-size: 2rem;
   color: var(--rosewater);
   padding: 0 2rem 0.5rem 2rem;
   border-bottom: 1px solid var(--overlay0);
-}
-
-.timer {
-  font-weight: 600;
-  font-size: 5rem;
-}
-
-.blink {
-  animation: blink-animation 2s infinite;
-}
-
-.delimiter {
-  color: var(--overlay0);
 }
 
 body {

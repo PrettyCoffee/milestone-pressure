@@ -8,19 +8,9 @@
   </head>
   <body class="mocha">
     <div class="label">Zeit bis zur Abgabe</div>
-
-    <div class="timer">
-      <span id="days"></span>
-      <span class="delimiter">d</span>
-      <span id="hours"></span>
-      <span class="delimiter blink">:</span>
-      <span id="minutes"></span>
-      <span class="delimiter blink">:</span>
-      <span id="seconds"></span>
-      <span class="delimiter blink">.</span>
-      <span id="milliseconds"></span>
-    </div>
-
+    
+    <date-timer id="timer" days="0" hours="0" minutes="0" seconds="0" milliseconds="0"/>
+    
     <script src="./main.ts" type="module"></script>
   </body>
 </html>
