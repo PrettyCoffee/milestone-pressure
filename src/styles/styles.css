@@ -1,5 +1,5 @@
 @import "./catppuccin.css";
-@import "./font/open-sans.css";
+@import "../font/open-sans.css";
 
 .label {
   font-size: 2rem;
