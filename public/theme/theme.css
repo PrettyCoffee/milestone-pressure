@@ -1,4 +1,4 @@
-body.mocha {
+.mocha {
   --crust: #11111b;
   --mantle: #181825;
   --base: #1e1e2e;
@@ -27,7 +27,7 @@ body.mocha {
   --rosewater: #f5e0dc;
 }
 
-body.latte {
+.latte {
   --crust: #dce0e8;
   --mantle: #e6e9ef;
   --base: #eff1f5;
@@ -56,7 +56,7 @@ body.latte {
   --rosewater: #dc8a78;
 }
 
-body.frappe {
+.frappe {
   --crust: #232634;
   --mantle: #292c3c;
   --base: #303446;
@@ -85,7 +85,7 @@ body.frappe {
   --rosewater: #f2d5cf;
 }
 
-body.macchiato {
+.macchiato {
   --rosewater: #f4dbd6;
   --flamingo: #f0c6c6;
   --pink: #f5bde6;
