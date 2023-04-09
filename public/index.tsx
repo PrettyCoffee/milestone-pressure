@@ -3,7 +3,7 @@ import { hydrate, prerender as ssr } from "preact-iso"
 import { Timer } from "components"
 
 export const App = () => (
-  <div class={"app"}>
+  <div className={"app"}>
     <Timer
       label="Zeit bis zur Abgabe"
       endDate={new Date("2023-03-23T00:00:00")}

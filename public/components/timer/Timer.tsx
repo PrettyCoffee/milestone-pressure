@@ -34,7 +34,7 @@ const Segment = ({ type, value }: SegmentProps) => {
     <>
       {[...displayValue].map((digit, index) => (
         // eslint-disable-next-line react/no-array-index-key
-        <span key={index} class={styles.digit}>
+        <span key={index} className={styles.digit}>
           {digit}
         </span>
       ))}
@@ -48,7 +48,7 @@ interface DelimiterProps {
 }
 
 const Delimiter = ({ value, blink }: DelimiterProps) => (
-  <span class={`${styles.delimiter} ${blink ? styles.blink : ""}`}>
+  <span className={`${styles.delimiter} ${blink ? styles.blink : ""}`}>
     {value}
   </span>
 )
@@ -65,9 +65,9 @@ export const Timer = ({ endDate, label }: TimerProps) => {
   })
 
   return (
-    <div class={styles.wrapper}>
-      <div class={styles.label}>{label}</div>
-      <div class={styles.timer} style={{ color: getColor(days, hours) }}>
+    <div className={styles.wrapper}>
+      <div className={styles.label}>{label}</div>
+      <div className={styles.timer} style={{ color: getColor(days, hours) }}>
         <Segment type="days" value={days} />
         <Delimiter value="d" />
         <Segment type="hours" value={hours} />

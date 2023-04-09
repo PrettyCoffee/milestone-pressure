@@ -1,29 +1,29 @@
 {
-	"compileOnSave": false,
-	"compilerOptions": {
-		"baseUrl": "./public",
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./public",
 
-		"target": "esnext",
-		"module": "esnext",
+    "target": "esnext",
+    "module": "esnext",
     "lib": ["ESNext", "DOM"],
-		"allowJs": false,
+    "allowJs": false,
     "esModuleInterop": true,
-		"strict": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"noEmit": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-		"allowSyntheticDefaultImports": true,
-		"downlevelIteration": true,
-		"jsx": "preserve",
-		"jsxFactory": "preact.h",
-		"jsxFragmentFactory": "preact.Fragment"
-	},
-	"include": ["node_modules/wmr/types.d.ts", "**/*"],
-	"typeAcquisition": {
-		"enable": true
-	}
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "jsx": "preserve",
+    "jsxFactory": "preact.h",
+    "jsxFragmentFactory": "preact.Fragment"
+  },
+  "include": ["node_modules/wmr/types.d.ts", "**/*"],
+  "typeAcquisition": {
+    "enable": true
+  }
 }
