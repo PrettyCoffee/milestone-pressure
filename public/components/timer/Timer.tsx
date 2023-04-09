@@ -34,9 +34,7 @@ const Segment = ({ type, value }: SegmentProps) => {
     <>
       {[...displayValue].map((digit, index) => (
         // eslint-disable-next-line react/no-array-index-key
-        <span key={index} className={styles.digit}>
-          {digit}
-        </span>
+        <span key={index}>{digit}</span>
       ))}
     </>
   )
@@ -54,30 +52,39 @@ const Delimiter = ({ value, blink }: DelimiterProps) => (
 )
 
 interface TimerProps {
-  label: string
   endDate: Date
+  style?: "short" | "long"
+  className?: string
 }
 
-export const Timer = ({ endDate, label }: TimerProps) => {
+export const Timer = ({
+  endDate,
+  style = "short",
+  className = "",
+}: TimerProps) => {
   const { days, hours, minutes, seconds, milliseconds } = useTimer({
     endDate,
     fps: 60,
   })
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.label}>{label}</div>
-      <div className={styles.timer} style={{ color: getColor(days, hours) }}>
-        <Segment type="days" value={days} />
-        <Delimiter value="d" />
-        <Segment type="hours" value={hours} />
-        <Delimiter value=":" blink />
-        <Segment type="minutes" value={minutes} />
-        <Delimiter value=":" blink />
-        <Segment type="seconds" value={seconds} />
-        <Delimiter value="." blink />
-        <Segment type="milliseconds" value={milliseconds} />
-      </div>
+    <div
+      className={`${styles.timer} ${className}`}
+      style={{ color: getColor(days, hours) }}
+    >
+      <Segment type="days" value={days} />
+      <Delimiter value="d" />
+      <Segment type="hours" value={hours} />
+      <Delimiter value=":" blink />
+      <Segment type="minutes" value={minutes} />
+      {style === "long" && (
+        <>
+          <Delimiter value=":" blink />
+          <Segment type="seconds" value={seconds} />
+          <Delimiter value="." blink />
+          <Segment type="milliseconds" value={milliseconds} />
+        </>
+      )}
     </div>
   )
 }
