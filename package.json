@@ -35,7 +35,10 @@
     "extends": [
       "@pretty-cozy/eslint-config/base-ts",
       "@pretty-cozy/eslint-config/preact"
-    ]
+    ],
+    "rules": {
+      "react/no-unknown-property": "off"
+    }
   },
   "lint-staged": {
     "*.{ts,tsx}": [
