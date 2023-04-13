@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(/theme/fonts/Quicksand-Regular.ttf?asset) format("truetype");
+}
+
+@font-face {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(/theme/fonts/Quicksand-SemiBold.ttf?asset) format("truetype");
+}
