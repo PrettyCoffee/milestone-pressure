@@ -4,8 +4,15 @@
   align-items: center;
   flex-direction: column;
   gap: 1rem;
+  margin: 0 auto;
 
   font-size: min(10vw, 5rem);
+}
+
+.wrapper :global span.digit {
+  display: inline-block;
+  width: 0.55em;
+  text-align: center;
 }
 
 .label {
