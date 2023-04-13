@@ -11,7 +11,9 @@
     "preview": "wmr serve",
     "lint": "eslint ./public",
     "lint:fix": "npm run lint -- --fix",
-    "prepare": "cozy-git-hooks install -q"
+    "prepare": "cozy-git-hooks install -q",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "preact": "^10.13.1",
@@ -23,6 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
     "eslint": "^8.36.0",
+    "gh-pages": "^5.0.0",
     "prettier": "^2.8.4",
     "rollup-plugin-includepaths": "^0.2.4",
     "wmr": "^3.8.0"
