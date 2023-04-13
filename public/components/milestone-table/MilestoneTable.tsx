@@ -9,8 +9,19 @@ import styles from "./milestone-table.module.css"
 export interface Milestone {
   id: string
   deadline: Date
+  start: Date
   label: string
   current: boolean
+}
+const isInProgress = ([start, end]: [Date, Date], fallback = false) => {
+  const now = Date.now()
+  const didStart = start.valueOf() - now <= 0
+  const isNotFinished = end.valueOf() - now > 0
+
+  return (
+    (isNotFinished && didStart && start.valueOf() !== 0) ||
+    (start.valueOf() === 0 && fallback) // if start was not defined, use the fallback
+  )
 }
 
 interface TableData {
@@ -27,7 +38,12 @@ const parseDate = (date: Date) =>
     day: "2-digit",
   })
 
-const useMilestone = ({ label, deadline, current }: Milestone): TableData => {
+const useMilestone = ({
+  label,
+  deadline,
+  start,
+  current,
+}: Milestone): TableData => {
   const date = useMemo(() => parseDate(deadline), [deadline])
 
   const timeLeft = useTimer({
@@ -35,8 +51,10 @@ const useMilestone = ({ label, deadline, current }: Milestone): TableData => {
     fps: 1,
   })
 
+  const inProgress = isInProgress([start, deadline], current)
+
   return {
-    status: timeLeft <= 0 ? "success" : current ? "current" : "none",
+    status: timeLeft <= 0 ? "success" : inProgress ? "current" : "none",
     label,
     timeLeft,
     deadline: date,

@@ -4,16 +4,24 @@ import { HugeTimer, MilestoneTable } from "components"
 
 import milestones from "./milestones.json"
 
-const sorted = milestones.sort((a, b) => {
+const parsedData = milestones.map(({ deadline, start, ...rest }) => ({
+  ...rest,
+  deadline: new Date(deadline),
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  start: start ? new Date(start) : new Date(0),
+}))
+
+const sorted = parsedData.sort((a, b) => {
   const dateA = new Date(a.deadline)
   const dateB = new Date(b.deadline)
   return dateA.valueOf() - dateB.valueOf()
 })
 
-const currentMilestone = sorted.find(milestone => {
-  const date = new Date(milestone.deadline)
+const currentMilestone = sorted.find(({ deadline, start }) => {
   const now = Date.now()
-  return date.valueOf() - now > 0
+  const isNotFinished = deadline.valueOf() - now > 0
+  const startIsPassed = start.valueOf() - now <= 0
+  return isNotFinished && startIsPassed
 })
 
 const tableData = sorted.map(({ deadline, id, ...rest }) => ({
