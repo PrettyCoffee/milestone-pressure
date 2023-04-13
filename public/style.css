@@ -1,3 +1,22 @@
 @import "./theme/global.css?asset";
 @import "./theme/fonts.css?asset";
 @import "./theme/theme.css?asset";
+
+.app {
+  padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  height: max-content;
+}
+
+.main {
+  margin: 0 auto;
+  width: max-content;
+  max-width: calc(100% - 1rem);
+}
