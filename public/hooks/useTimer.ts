@@ -1,6 +1,6 @@
 import { useState } from "preact/hooks"
 
-import { useInterval } from "hooks"
+import { useInterval } from "hooks/useInterval"
 
 const millisecondsUntilDate = (date: Date) => date.valueOf() - Date.now()
 
