@@ -51,6 +51,14 @@
   z-index: 0;
 }
 
+.table tr:first-of-type td[data-type="timeline"]::before {
+  top: 50%;
+}
+
+.table tr:last-of-type td[data-type="timeline"]::before {
+  bottom: 50%;
+}
+
 .table td[data-type="timeline"]::after {
   content: "";
   position: absolute;
@@ -85,7 +93,7 @@
   transition: 0.125s;
 }
 
-.table tbody  tr:hover {
+.table tbody tr:hover {
   background-color: var(--surface0);
   transform: scale(1.05);
 }
