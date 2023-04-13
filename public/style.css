@@ -1,6 +1,6 @@
-@import "./theme/global.css?asset";
-@import "./theme/fonts.css?asset";
-@import "./theme/theme.css?asset";
+@import "/theme/global.css?asset";
+@import "/theme/fonts.css?asset";
+@import "/theme/theme.css?asset";
 
 .app {
   padding: 2rem 1rem;
