@@ -1,8 +1,6 @@
-import { useMemo, useState } from "preact/hooks"
+import { useState } from "preact/hooks"
 
 import { useInterval } from "hooks"
-
-import { getDateSegments } from "./getDateSegments"
 
 const millisecondsUntilDate = (date: Date) => date.valueOf() - Date.now()
 
@@ -24,5 +22,5 @@ export const useTimer = ({ endDate, fps }: TimerOptions) => {
     },
   })
 
-  return useMemo(() => getDateSegments(leftTime), [leftTime])
+  return leftTime
 }

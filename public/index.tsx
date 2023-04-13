@@ -1,6 +1,6 @@
 import { hydrate, prerender as ssr } from "preact-iso"
 
-import { Timer } from "components"
+import { HugeTimer } from "components/huge-timer"
 
 import milestones from "./milestones.json"
 
@@ -18,7 +18,7 @@ const currentMilestone = sorted.find(milestone => {
 
 export const App = () => (
   <div className={"app"}>
-    <Timer
+    <HugeTimer
       label={currentMilestone?.label ?? ""}
       endDate={new Date(currentMilestone?.deadline ?? "")}
     />

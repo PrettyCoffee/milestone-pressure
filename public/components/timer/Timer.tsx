@@ -1,6 +1,5 @@
+import { getDateSegments, DateSegmentName } from "./getDateSegments"
 import styles from "./timer.module.css"
-import { DateSegmentName } from "./utils/getDateSegments"
-import { useTimer } from "./utils/useTimer"
 
 const getColor = (days: number, hours: number) => {
   if (days > 2) return "var(--text)"
@@ -52,20 +51,17 @@ const Delimiter = ({ value, blink }: DelimiterProps) => (
 )
 
 interface TimerProps {
-  endDate: Date
+  time: number
   style?: "short" | "long"
   className?: string
 }
 
 export const Timer = ({
-  endDate,
+  time,
   style = "short",
   className = "",
 }: TimerProps) => {
-  const { days, hours, minutes, seconds, milliseconds } = useTimer({
-    endDate,
-    fps: 60,
-  })
+  const { days, hours, minutes, seconds, milliseconds } = getDateSegments(time)
 
   return (
     <div
