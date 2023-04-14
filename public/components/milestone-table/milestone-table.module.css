@@ -1,46 +1,22 @@
-.table {
-  border-collapse: separate;
-    border-spacing: 0 0.25rem;
-}
-
-.table td, .table th {
-  text-align: center;
-  padding: 0 1rem;
-}
-
-.table tr {
-  --row-height: 2rem;
-  height: var(--row-height);
-}
-
-.table td[data-type="timer"], .table th[data-type="timer"] {
-  text-align: end;
-}
-
-.table td[data-type="text"], .table th[data-type="text"] {
-  text-align: start;
-}
-
-.table td[data-type="timeline"] {
+.timeline {
   position: relative;
-  display: block;
   width: var(--row-height);
   height: var(--row-height);
   --status: var(--surface1);
 }
 
-.table td[data-type="timeline"][data-status="current"] {
+.timeline[data-status="current"] {
   --status: var(--blue);
 }
 
-.table td[data-type="timeline"][data-status="success"] {
+.timeline[data-status="success"] {
   --status: var(--green);
 }
-.table td[data-type="timeline"][data-status="failed"] {
+.timeline[data-status="failed"] {
   --status: var(--red);
 }
 
-.table td[data-type="timeline"]::before {
+.timeline::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -51,15 +27,15 @@
   z-index: 0;
 }
 
-.table tr:first-of-type td[data-type="timeline"]::before {
+.table [role="row"]:first-of-type .timeline::before {
   top: 50%;
 }
 
-.table tr:last-of-type td[data-type="timeline"]::before {
+.table [role="row"]:last-of-type .timeline::before {
   bottom: 50%;
 }
 
-.table td[data-type="timeline"]::after {
+.timeline::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -72,7 +48,7 @@
   border: 0.125rem solid var(--status);
 }
 
-.table td[data-type="timeline"] svg {
+.timeline svg {
   position: absolute;
   z-index: 1;
   inset: 0;
@@ -80,20 +56,15 @@
   color: var(--status);
 }
 
-.table :global tr.finished {
+.table :global [role="row"].finished {
   opacity: 0.5;
 }
 
-.table :global tr.current {
+.table :global [role="row"].current::after {
   outline: 0.125rem solid var(--surface0);
-  outline-offset: 2px;
+  outline-offset: 0.125rem;
 }
 
-.table tbody tr {
-  transition: 0.125s;
-}
-
-.table tbody tr:hover {
-  background-color: var(--surface0);
-  transform: scale(1.05);
+.table [role="cell"]:first-of-type {
+  padding: 0 0 0 0.25rem;
 }

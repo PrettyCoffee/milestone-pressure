@@ -1,6 +1,7 @@
 import { useMemo } from "preact/hooks"
 
 import { Check, Close, Icon, IconDefinition, Crosshair } from "components/icon"
+import { Table } from "components/table"
 import { Timer } from "components/timer"
 import { useTimer } from "hooks"
 
@@ -77,28 +78,36 @@ const Row = (props: Milestone) => {
 
   const icon = statusIcon[status]
   return (
-    <tr className={classNames.join(" ")}>
-      <td data-type="timeline" data-status={status}>
-        {icon && <Icon icon={icon} size="sm" />}
-      </td>
-      <td data-type="text">{label}</td>
-      <td data-type="date">{deadline}</td>
-      <td data-type="timer">
+    <Table.Row className={classNames.join(" ")}>
+      <Table.Cell align="center">
+        <div className={styles.timeline} data-status={status}>
+          {icon && <Icon icon={icon} size="sm" />}
+        </div>
+      </Table.Cell>
+      <Table.Cell align="start">{label}</Table.Cell>
+      <Table.Cell align="center">{deadline}</Table.Cell>
+      <Table.Cell align="end">
         {timeLeft > 0 ? <Timer time={timeLeft} style="short" /> : "-"}
-      </td>
-    </tr>
+      </Table.Cell>
+    </Table.Row>
   )
 }
 
 const Headers = () => (
-  <tr>
-    <th className="visually-hidden" data-type="timeline">
+  <Table.Row>
+    <Table.Cell header align="center" className="visually-hidden">
       Status
-    </th>
-    <th data-type="text">Label</th>
-    <th data-type="date">Deadline</th>
-    <th data-type="timer">Time left</th>
-  </tr>
+    </Table.Cell>
+    <Table.Cell header align="start">
+      Label
+    </Table.Cell>
+    <Table.Cell header align="center">
+      Deadline
+    </Table.Cell>
+    <Table.Cell header align="end">
+      Time left
+    </Table.Cell>
+  </Table.Row>
 )
 
 interface MilestoneTableProps {
@@ -107,15 +116,15 @@ interface MilestoneTableProps {
 
 export const MilestoneTable = ({ milestones }: MilestoneTableProps) => {
   return (
-    <table className={styles.table}>
-      <thead>
+    <Table.Root className={styles.table}>
+      <Table.Header>
         <Headers />
-      </thead>
-      <tbody>
+      </Table.Header>
+      <Table.Body>
         {milestones.map(milestone => (
           <Row key={milestone.id} {...milestone} />
         ))}
-      </tbody>
-    </table>
+      </Table.Body>
+    </Table.Root>
   )
 }
