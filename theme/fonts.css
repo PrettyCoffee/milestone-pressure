@@ -4,7 +4,8 @@
   font-weight: 400;
   font-stretch: 100%;
   font-display: swap;
-  src: url(/milestone-pressure/theme/fonts/Quicksand-Regular.ttf?asset) format("truetype");
+  src: url(/milestone-pressure/theme/fonts/quicksand-regular.woff2?asset) format("woff2"), /* Chrome 36+, Opera 23+, Firefox 39+ */
+       url(/milestone-pressure/theme/fonts/quicksand-regular.woff?asset) format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 @font-face {
@@ -13,5 +14,6 @@
   font-weight: 600;
   font-stretch: 100%;
   font-display: swap;
-  src: url(/milestone-pressure/theme/fonts/Quicksand-SemiBold.ttf?asset) format("truetype");
+  src: url(/milestone-pressure/theme/fonts/quicksand-semibold.woff2?asset) format("woff2"), /* Chrome 36+, Opera 23+, Firefox 39+ */
+       url(/milestone-pressure/theme/fonts/quicksand-semibold.woff?asset) format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
