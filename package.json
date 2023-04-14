@@ -12,8 +12,7 @@
     "lint": "eslint ./public",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "cozy-git-hooks install -q",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "node ./scripts/deploy.js"
   },
   "dependencies": {
     "preact": "^10.13.1",

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 declare module "rollup-plugin-includepaths" {
   import "rollup-plugin-includepaths"
   import { Plugin } from "wmr"
