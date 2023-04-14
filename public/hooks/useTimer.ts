@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks"
+import { useEffect, useState } from "preact/hooks"
 
 import { useInterval } from "hooks/useInterval"
 
@@ -12,7 +12,7 @@ interface TimerOptions {
 export const useTimer = ({ endDate, fps }: TimerOptions) => {
   const [leftTime, setLeftTime] = useState(millisecondsUntilDate(endDate))
 
-  useInterval({
+  const { start } = useInterval({
     fps,
     listener: stop => {
       const diff = endDate.valueOf() - Date.now()
@@ -21,6 +21,12 @@ export const useTimer = ({ endDate, fps }: TimerOptions) => {
       if (diff <= 0) stop()
     },
   })
+
+  useEffect(() => {
+    console.log(endDate)
+    // restart if date is changed
+    start()
+  }, [endDate, start])
 
   return leftTime
 }
