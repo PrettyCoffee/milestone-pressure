@@ -20,3 +20,9 @@
   width: max-content;
   max-width: calc(100% - 1rem);
 }
+
+.theme-toggle-position {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}

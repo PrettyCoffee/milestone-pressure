@@ -26,6 +26,7 @@
 
   --transition: 0.25s;
   transition: var(--transition);
+  transition-property: transform;
 }
 
 .body .row:hover {
@@ -40,7 +41,7 @@
   inset: 0;
   border-radius: 0.5rem;
   transition: var(--transition);
-  transition-property: transform, background-color;
+  transition-property: background-color;
 }
 
 .body .row:hover::after {

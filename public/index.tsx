@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks"
 import { hydrate, prerender as ssr } from "preact-iso"
 
-import { HugeTimer, MilestoneTable } from "components"
+import { HugeTimer, MilestoneTable, ThemeToggle } from "components"
 import { Milestone } from "components/milestone-table/MilestoneTable"
+import { useLocalStorage } from "hooks"
 
 import milestones from "./milestones.json"
 
@@ -59,7 +60,17 @@ const useCurrentMilestone = (milestones: Milestone[]) => {
   return { current, data }
 }
 
+const themes = ["mocha", "macchiato", "frappe", "latte"]
+
 export const App = () => {
+  const [theme, setTheme] = useLocalStorage("theme", themes[0])
+
+  useEffect(() => {
+    themes.forEach(name => {
+      document.body.classList[name === theme ? "add" : "remove"](name)
+    })
+  }, [theme])
+
   const tableData = useMemo(
     () =>
       sorted.map(({ deadline, id, ...rest }) => ({
@@ -74,7 +85,10 @@ export const App = () => {
   const { current, data } = useCurrentMilestone(tableData)
 
   return (
-    <div className={"app"}>
+    <div className="app">
+      <div className="theme-toggle-position">
+        <ThemeToggle current={theme} options={themes} onChange={setTheme} />
+      </div>
       <HugeTimer
         label={current?.label ?? ""}
         endDate={current?.deadline ?? new Date("")}

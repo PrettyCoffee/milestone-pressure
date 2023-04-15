@@ -1,0 +1,121 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+
+  --transition: 0.5s;
+
+  height: 2rem;
+  width: 2rem;
+  transition: var(--transition);
+  transition-property: height, width, border-radius;
+}
+
+.wrapper:hover {
+  height: 8rem;
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transition: var(--transition);
+  transition-property: left, right, top, bottom, border-radius;
+}
+
+.wrapper:hover::before {
+  content: "";
+  position: absolute;
+  border-radius: 0 0 0 50vh ;
+  right: -1rem;
+  top: -1rem;
+  left: -3rem;
+  bottom: -3rem;
+}
+
+.wrapper .button:not(:first-of-type) {
+  height: 0rem;
+  opacity: 0;
+}
+
+.wrapper:hover .button:not(:first-of-type) {
+  height: 2rem;
+  opacity: 1;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  height: 2rem;
+  width: 2rem;
+  padding: 0;
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: var(--transition);
+  transition-property: height, opacity;
+}
+
+.button * {
+  cursor: pointer;
+}
+
+.bubbles {
+  position: relative;
+  width: 0;
+  height: 0;
+  --color: var(--base);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bubbles > span {
+  --size: 0.75rem;
+
+  display: inline-block;
+  height: var(--size);
+  width: var(--size);
+  border-radius: 50vh;
+  border: 0.125rem solid var(--surface1);
+  
+  position: absolute;
+  transition: 0.25s;
+  transition-property: top, right, bottom, left;
+}
+
+.bubbles > span:nth-of-type(1) {
+  background-color: var(--text);
+  top: calc(-0.25 * var(--size));
+  left: calc(-0.25 * var(--size));
+}
+
+.bubbles > span:nth-of-type(2) {
+  background-color: var(--base);
+  top: calc(-0.25 * var(--size));
+  right: calc(-0.25 * var(--size));
+}
+
+.bubbles > span:nth-of-type(3) {
+  background-color: var(--blue);
+  top: calc(-0.75 * var(--size));
+}
+
+.button:hover > .bubbles > span:nth-of-type(1) {
+  top: calc(-0.15 * var(--size));
+  left: 0;
+}
+
+.button:hover > .bubbles > span:nth-of-type(2) {
+  top: calc(-0.15 * var(--size));
+  right: 0;
+}
+
+.button:hover > .bubbles > span:nth-of-type(3) {
+  top: calc(-0.95 * var(--size));
+}

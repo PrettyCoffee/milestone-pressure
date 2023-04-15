@@ -1,8 +1,6 @@
 import styles from "./table.module.css"
 import { PropsWithChildren } from "../utils/baseProps"
-
-const joinClassNames = (...args: (string | undefined)[]) =>
-  args.filter(Boolean).join(" ")
+import { joinClassNames } from "../utils/joinClassNames"
 
 type GenericProps = PropsWithChildren<{ className?: string }>
 
