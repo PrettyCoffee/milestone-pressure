@@ -113,3 +113,39 @@
   --mantle: #1e2030;
   --crust: #181926;
 }
+
+.everforest {
+  /* Missing colors
+  --rosewater: #f4dbd6;
+  --flamingo: #f0c6c6;
+  --pink: #f5bde6;
+  --mauve: #c6a0f6;
+  --maroon: #ee99a0;
+  --peach: #f5a97f;
+  --teal: #8bd5ca;
+  --sky: #91d7e3;
+  --sapphire: #7dc4e4;
+  --lavender: #b7bdf8;
+  */
+  
+  --red: #E67E80;
+  --orange: #E69875;
+  --yellow: #DBBC7F;
+  --green: #A7C080;
+  --aqua: #83C092;
+  --blue: #7FBBB3;
+  --purple: #D699B6;
+
+  --text: #D3C6AA;
+  --subtext1: #9DA9A0;
+  --subtext0: #859289;
+  --overlay2: #7A8478;
+  --overlay1: #68746b;
+  --overlay0: #56635f;
+  --surface2: #4F585E;
+  --surface1: #475258;
+  --surface0: #3D484D;
+  --base: #343F44;
+  --mantle: #2D353B;
+  --crust: #232A2E;
+}
