@@ -29,11 +29,15 @@ const restoreFonts = replaceInFile(
 )
 console.log("✅ Changed urls for github pages")
 
-execSync("npm run build")
-console.log("✅ Transpiled code")
+try {
+  execSync("npm run build")
+  console.log("✅ Transpiled code")
 
-execSync("npx gh-pages -d dist")
-console.log("✅ Deployed to github pages")
+  execSync("npx gh-pages -d dist")
+  console.log("✅ Deployed to github pages")
+} catch (e) {
+  console.error(e)
+}
 
 restoreStyles()
 restoreFonts()
