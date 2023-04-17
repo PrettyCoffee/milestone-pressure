@@ -86,9 +86,6 @@ export const App = () => {
 
   return (
     <div className="app">
-      <div className="theme-toggle-position">
-        <ThemeToggle current={theme} options={themes} onChange={setTheme} />
-      </div>
       <HugeTimer
         label={current?.label ?? ""}
         endDate={current?.deadline ?? new Date("")}
@@ -96,6 +93,7 @@ export const App = () => {
       <div className="main">
         <MilestoneTable milestones={data} />
       </div>
+      <ThemeToggle current={theme} options={themes} onChange={setTheme} />
     </div>
   )
 }

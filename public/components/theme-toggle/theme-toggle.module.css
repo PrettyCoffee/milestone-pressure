@@ -1,3 +1,9 @@
+.themeTogglePosition {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+
 .wrapper {
   position: relative;
   display: flex;
@@ -124,6 +130,7 @@
   background-color: var(--surface);
   border-radius: 0.5rem;
   opacity: 0;
+  white-space: nowrap;
 
   transition: 0.25s ease-in-out;
   transition-property: max-width, opacity;
