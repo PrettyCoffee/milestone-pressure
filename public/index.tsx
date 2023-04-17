@@ -60,15 +60,24 @@ const useCurrentMilestone = (milestones: Milestone[]) => {
   return { current, data }
 }
 
-const themes = ["mocha", "macchiato", "frappe", "latte"]
+const themes = [
+  "catppuccin",
+  "catppuccin light",
+  "everforest",
+  "nord",
+  "nord light",
+]
 
 export const App = () => {
   const [theme, setTheme] = useLocalStorage("theme", themes[0])
 
   useEffect(() => {
-    themes.forEach(name => {
-      document.body.classList[name === theme ? "add" : "remove"](name)
-    })
+    const current = theme.split(" ")
+    themes
+      .flatMap(name => name.split(" "))
+      .forEach(name => {
+        document.body.classList[current.includes(name) ? "add" : "remove"](name)
+      })
   }, [theme])
 
   const tableData = useMemo(

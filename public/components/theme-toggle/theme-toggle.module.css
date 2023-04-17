@@ -142,5 +142,5 @@
 .themeOption:hover > .label,
 input:focus-visible ~ .label {
   opacity: 1;
-  max-width: 7rem;
+  max-width: 8.5rem;
 }

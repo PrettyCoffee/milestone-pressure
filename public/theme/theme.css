@@ -1,4 +1,28 @@
-.mocha {
+/** Main theme */
+:root {
+  /** base background */
+  --base: #1e1e2e;
+  /** surfaces on the background (e.g. modal) */
+  --surface: #313244;
+  /** element backgrounds (e.g. button) */
+  --overlay: #585b70;
+  /** muted text (e.g. disabled text) */
+  --muted: #7f849c;
+  /** text */
+  --text: #cdd6f4;
+  
+  /** colors */
+  --blue: #89b4fa;   /* Active */
+  --green: #a6e3a1;  /* Success */
+  --red: #f38ba8;    /* Attention 0 */
+  --orange: #eba0ac; /* Attention 1 */
+  --amber: #fab387;  /* Attention 2 */
+  --yellow: #f9e2af; /* Attention 3 */
+  --rose: #f5e0dc;   /* Attention 4 */
+}
+
+.catppuccin {
+  /** Original theme */
   --crust: #11111b;
   --mantle: #181825;
   --base: #1e1e2e;
@@ -11,6 +35,7 @@
   --subtext0: #a6adc8;
   --subtext1: #bac2de;
   --text: #cdd6f4;
+
   --lavender: #b4befe;
   --blue: #89b4fa;
   --sapphire: #74c7ec;
@@ -26,6 +51,7 @@
   --flamingo: #f2cdcd;
   --rosewater: #f5e0dc;
 
+  /** Theme mapping */
   --surface: var(--surface0);
   --overlay: var(--surface2);
   --muted: var(--overlay1);
@@ -35,16 +61,17 @@
   --rose: var(--rosewater);
   
   /*
-  --base: var(--base);
-  --text: var(--text);
-  --blue: #89b4fa;
-  --green: #a6e3a1;
-  --red: #f38ba8;
-  --yellow: #f9e2af;
+  --base: ;
+  --text: ;
+  --blue: ;
+  --green: ;
+  --red: ;
+  --yellow: ;
   */
 }
 
-.latte {
+.catppuccin.light {
+    /** Original theme */
   --crust: #dce0e8;
   --mantle: #e6e9ef;
   --base: #eff1f5;
@@ -57,6 +84,7 @@
   --subtext0: #6c6f85;
   --subtext1: #5c5f77;
   --text: #4c4f69;
+
   --lavender: #7287fd;
   --blue: #1e66f5;
   --sapphire: #209fb5;
@@ -71,134 +99,116 @@
   --pink: #ea76cb;
   --flamingo: #dd7878;
   --rosewater: #dc8a78;
+}
 
-  --surface: var(--surface0);
-  --overlay: var(--surface2);
-  --muted: var(--overlay1);
+.everforest {
+  /** Original theme */
   
-  --orange: var(--maroon);
-  --amber: var(--peach);
-  --rose: var(--rosewater);
+  --bg_dim: #232A2E;
+  --bg0: #2D353B;
+  --bg1: #343F44;
+  --bg2: #3D484D;
+  --bg3: #475258;
+  --bg4: #4F585E;
+  --bg5: #56635f;
+  --bg_visual: #543A48;
+  --bg_red: #514045;
+  --bg_green: #425047;
+  --bg_blue: #3A515D;
+  --bg_yellow: #4D4C43;
+  --fg: #D3C6AA;
+
+  --red: #E67E80;
+  --orange: #E69875;
+  --yellow: #DBBC7F;
+  --green: #A7C080;
+  --aqua: #83C092;
+  --blue: #7FBBB3;
+  --purple: #D699B6;
+
+  --grey0: #7A8478;
+  --grey1: #859289;
+  --grey2: #9DA9A0;
+
+  --statusline1: #A7C080;
+  --statusline2: #D3C6AA;
+  --statusline3: #E67E80;
+
+  /** Theme mapping */
+  --base: var(--bg1);
+  --surface: var(--bg2);
+  --overlay: var(--bg3);
+  --muted: var(--grey1);
+  --text: var(--fg);
+  
+  --amber: #e2aa76;
+  --rose: #d7c194;
   
   /*
-  --base: var(--base);
-  --text: var(--text);
-  --blue: #89b4fa;
-  --green: #a6e3a1;
-  --red: #f38ba8;
-  --yellow: #f9e2af;
+  --blue: ;
+  --green: ;
+  --red: ;
+  --orange: ;
+  --yellow: ;
   */
 }
 
-.frappe {
-  --crust: #232634;
-  --mantle: #292c3c;
-  --base: #303446;
-  --surface0: #414559;
-  --surface1: #51576d;
-  --surface2: #626880;
-  --overlay0: #737994;
-  --overlay1: #838ba7;
-  --overlay2: #949cbb;
-  --subtext0: #a5adce;
-  --subtext1: #b5bfe2;
-  --text: #c6d0f5;
-  --lavender: #babbf1;
-  --blue: #8caaee;
-  --sapphire: #85c1dc;
-  --sky: #99d1db;
-  --teal: #81c8be;
-  --green: #a6d189;
-  --yellow: #e5c890;
-  --peach: #ef9f76;
-  --maroon: #ea999c;
-  --red: #e78284;
-  --mauve: #ca9ee6;
-  --pink: #f4b8e4;
-  --flamingo: #eebebe;
-  --rosewater: #f2d5cf;
 
-  --surface: var(--surface0);
-  --overlay: var(--surface2);
-  --muted: var(--overlay1);
+.nord {
+  /** texts, backgrounds */
+  --nord0: #2e3440;
+  /** lighter background color for UI elements like status bars */
+  --nord1: #3b4252;
+  /** selection- and highlight color */
+  --nord2: #434c5e;
+  /** disabled elements*/
+  --nord3: #4c566a;
+  /** semi-light background depending on the theme shading design */
+  --nord4: #d8dee9;
+  /** lighter background color for UI elements like status bars */
+  --nord5: #e5e9f0;
+  /** background, selection- and highlight color */
+  --nord6: #eceff4;
+  /** classes, types and documentation tags. */
+  --nord7: #8fbcbb;
+  /** Main color for primary UI elements */
+  --nord8: #88c0d0;
+  /** language-specific syntactic/reserved support characters and keywords, operators, tags, units and punctuations */
+  --nord9: #81a1c1;
+  /** */
+  --nord10: #5e81ac;
+  /** errors, git/diff deletion and linter marker */
+  --nord11: #bf616a;
+  /** annotations */
+  --nord12: #d08770;
+  /** warnings and git/diff renamings */
+  --nord13: #ebcb8b;
+  /** git/diff additions and success visualizations */
+  --nord14: #a3be8c;
+  /** numbers */
+  --nord15: #b48ead;
+
+  --base: var(--nord0);
+  --surface: var(--nord1);
+  --overlay: var(--nord2);
+  --muted: var(--nord3);
+  --text: var(--nord6);
   
-  --orange: var(--maroon);
-  --amber: var(--peach);
-  --rose: var(--rosewater);
-  
-  /*
-  --base: var(--base);
-  --text: var(--text);
-  --blue: #89b4fa;
-  --green: #a6e3a1;
-  --red: #f38ba8;
-  --yellow: #f9e2af;
-  */
+  --blue: var(--nord10);
+  --green: var(--nord14);
+  --red: var(--nord11);
+  --orange: var(--nord12);
+  --amber: #e1a87a;
+  --yellow: var(--nord13);
+  --rose: #ffd2e1;
 }
 
-.macchiato {
-  --rosewater: #f4dbd6;
-  --flamingo: #f0c6c6;
-  --pink: #f5bde6;
-  --mauve: #c6a0f6;
-  --red: #ed8796;
-  --maroon: #ee99a0;
-  --peach: #f5a97f;
-  --yellow: #eed49f;
-  --green: #a6da95;
-  --teal: #8bd5ca;
-  --sky: #91d7e3;
-  --sapphire: #7dc4e4;
-  --blue: #8aadf4;
-  --lavender: #b7bdf8;
-  --text: #cad3f5;
-  --subtext1: #b8c0e0;
-  --subtext0: #a5adcb;
-  --overlay2: #939ab7;
-  --overlay1: #8087a2;
-  --overlay0: #6e738d;
-  --surface2: #5b6078;
-  --surface1: #494d64;
-  --surface0: #363a4f;
-  --base: #24273a;
-  --mantle: #1e2030;
-  --crust: #181926;
+.nord.light {
+  --base: #fff;
+  --surface: var(--nord6);
+  --overlay: var(--nord4);
+  --muted: #717886;
+  --text: var(--nord1);
 
-  --surface: var(--surface0);
-  --overlay: var(--surface2);
-  --muted: var(--overlay1);
-  
-  --orange: var(--maroon);
-  --amber: var(--peach);
-  --rose: var(--rosewater);
-  
-  /*
-  --base: var(--base);
-  --text: var(--text);
-  --blue: #89b4fa;
-  --green: #a6e3a1;
-  --red: #f38ba8;
-  --yellow: #f9e2af;
-  */
-}
-
-:root {
-  /** base background */
-  --base: #1e1e2e;
-  /** surfaces on the background (e.g. modal) */
-  --surface: #313244;
-  /** element backgrounds (e.g. button) */
-  --overlay: #585b70;
-  /** muted text (e.g. disabled text) */
-  --muted: #7f849c;
-  /** text */
-  --text: #cdd6f4;
-  
-  --blue: #89b4fa;
-  --green: #a6e3a1;
-  --red: #f38ba8;
-  --orange: #eba0ac;
-  --amber: #fab387;
-  --yellow: #f9e2af;
-  --rose: #f5e0dc;
+  --rose: #ab9772;
 }
