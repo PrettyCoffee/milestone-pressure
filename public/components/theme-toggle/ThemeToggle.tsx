@@ -12,6 +12,8 @@ const splitHexColor = ([, ...hex]: string) => ({
 })
 
 const getThemeVarValue = (theme: string, varName: string) => {
+  if (typeof document === "undefined") return "#ffffff"
+
   const span = document.createElement("span")
   span.className = theme
   document.body.appendChild(span)
