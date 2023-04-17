@@ -60,10 +60,6 @@
   transition-property: height, opacity;
 }
 
-.button * {
-  cursor: pointer;
-}
-
 .bubbles {
   position: relative;
   width: 0;
