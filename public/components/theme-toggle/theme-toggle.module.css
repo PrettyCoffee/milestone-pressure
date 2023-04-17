@@ -12,7 +12,7 @@
   transition-property: height, width, border-radius;
 }
 
-.wrapper:hover {
+.wrapper:hover, .wrapper:focus-within {
   height: 8rem;
 }
 
@@ -34,30 +34,41 @@
   bottom: -3rem;
 }
 
-.wrapper .button:not(:first-of-type) {
+.wrapper button.themeOption {
   height: 0rem;
   opacity: 0;
 }
 
-.wrapper:hover .button:not(:first-of-type) {
-  height: 2rem;
+.wrapper:hover button.themeOption, .wrapper:focus-within button.themeOption {
+  height: var(--radio-size);
   opacity: 1;
 }
 
-.button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  height: 2rem;
-  width: 2rem;
-  padding: 0;
-  
+.themeOption {
+  --radio-size: 2rem;
+  height: var(--radio-size);
+  width: var(--radio-size);
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   transition: var(--transition);
   transition-property: height, opacity;
+}
+
+.themeOption[aria-checked="true"] {
+  border-radius: 50%;
+  outline: 8px solid var(--surface1);
+  outline-offset: -12px;
+}
+
+button.themeOption {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 .bubbles {
@@ -102,16 +113,19 @@
   top: calc(-0.75 * var(--size));
 }
 
-.button:hover > .bubbles > span:nth-of-type(1) {
+button.themeOption:hover > .bubbles > span:nth-of-type(1),
+button.themeOption:focus-visible > .bubbles > span:nth-of-type(1) {
   top: calc(-0.15 * var(--size));
   left: 0;
 }
 
-.button:hover > .bubbles > span:nth-of-type(2) {
+button.themeOption:hover > .bubbles > span:nth-of-type(2),
+button.themeOption:focus-visible > .bubbles > span:nth-of-type(2) {
   top: calc(-0.15 * var(--size));
   right: 0;
 }
 
-.button:hover > .bubbles > span:nth-of-type(3) {
+button.themeOption:hover > .bubbles > span:nth-of-type(3),
+button.themeOption:focus-visible > .bubbles > span:nth-of-type(3) {
   top: calc(-0.95 * var(--size));
 }
