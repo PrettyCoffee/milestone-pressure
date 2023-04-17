@@ -1,4 +1,4 @@
-import { useId } from "preact/hooks"
+import { useId, useMemo } from "preact/hooks"
 
 import styles from "./theme-toggle.module.css"
 import { ThemeInput } from "./ThemeInput"
@@ -17,7 +17,9 @@ const getThemeVarValue = (theme: string, varName: string) => {
   const span = document.createElement("span")
   span.className = theme
   document.body.appendChild(span)
-  return window.getComputedStyle(span).getPropertyValue(varName)
+  const value = window.getComputedStyle(span).getPropertyValue(varName)
+  span.remove()
+  return value
 }
 
 const sortByLightness = (themes: string[]) => {
@@ -30,6 +32,8 @@ const sortByLightness = (themes: string[]) => {
       weight: hexToNumber(r) + hexToNumber(g) + hexToNumber(b),
     }
   })
+
+  console.log(withWeight)
 
   return withWeight
     .sort((a, b) => (a.weight > b.weight ? 1 : -1))
@@ -50,6 +54,8 @@ export const ThemeToggle = ({
   const groupId = useId()
   const labelId = `theme-toggle-${groupId}`
 
+  const sortedOptions = useMemo(() => sortByLightness(options), [options])
+
   return (
     <div className={styles.themeTogglePosition}>
       <label id={labelId} className="visually-hidden">
@@ -57,7 +63,7 @@ export const ThemeToggle = ({
       </label>
 
       <div aria-labelledby={labelId} className={styles.wrapper}>
-        {sortByLightness(options).map(theme => (
+        {sortedOptions.map(theme => (
           <ThemeInput
             key={theme}
             theme={theme}
