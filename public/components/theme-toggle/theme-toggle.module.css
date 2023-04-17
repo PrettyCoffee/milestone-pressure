@@ -114,3 +114,26 @@
 .themeOption > input:focus-visible + .bubbles > span:nth-of-type(3) {
   top: calc(-0.95 * var(--size));
 }
+
+.themeOption > .label {
+  position: absolute;
+  right: 100%;
+  padding: 0.125rem 0.5rem;
+
+  pointer-events: none;
+  background-color: var(--surface1);
+  border-radius: 0.5rem;
+  opacity: 0;
+
+  transition: 0.25s ease-in-out;
+  transition-property: max-width, opacity;
+
+  max-width: 0;
+  overflow: hidden;
+}
+
+.themeOption:hover > .label,
+input:focus-visible ~ .label {
+  opacity: 1;
+  max-width: 7rem;
+}

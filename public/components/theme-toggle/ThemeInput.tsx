@@ -41,7 +41,7 @@ export const ThemeInput = ({
         onChange={handleChange}
       />
       <ThemeBubbles theme={theme} />
-      <span className="visually-hidden">{theme}</span>
+      <span className={styles.label}>{theme}</span>
     </label>
   )
 }
