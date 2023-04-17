@@ -3,10 +3,10 @@ import styles from "./timer.module.css"
 
 const getColor = (days: number, hours: number) => {
   if (days > 2) return "var(--text)"
-  if (days > 1) return "var(--rosewater)"
+  if (days > 1) return "var(--rose)"
   if (days > 0) return "var(--yellow)"
-  if (hours > 16) return "var(--peach)"
-  if (hours > 8) return "var(--maroon)"
+  if (hours > 16) return "var(--amber)"
+  if (hours > 8) return "var(--orange)"
   return "var(--red)"
 }
 

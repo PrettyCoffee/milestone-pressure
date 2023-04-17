@@ -2,7 +2,7 @@
   position: relative;
   width: var(--row-height);
   height: var(--row-height);
-  --status: var(--surface1);
+  --status: var(--muted);
 }
 
 .timeline[data-status="current"] {
@@ -61,7 +61,7 @@
 }
 
 .table :global [role="row"].current::after {
-  outline: 0.125rem solid var(--surface0);
+  outline: 0.125rem solid var(--surface);
   outline-offset: 0.125rem;
 }
 

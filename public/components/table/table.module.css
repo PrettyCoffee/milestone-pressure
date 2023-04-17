@@ -45,7 +45,7 @@
 }
 
 .body .row:hover::after {
-  background-color: var(--surface0);
+  background-color: var(--surface);
 }
 
 .cell {

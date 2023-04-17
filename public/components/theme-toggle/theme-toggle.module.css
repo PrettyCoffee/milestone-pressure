@@ -52,7 +52,7 @@
   position: absolute;
   inset: 0.25rem;
 
-  background-color: var(--surface1);
+  background-color: var(--overlay);
   border-radius: 50%;
 }
 
@@ -74,7 +74,7 @@
   height: var(--size);
   width: var(--size);
   border-radius: 50%;
-  border: 0.125rem solid var(--surface1);
+  border: 0.125rem solid var(--overlay);
   
   position: absolute;
   transition: 0.25s;
@@ -121,7 +121,7 @@
   padding: 0.125rem 0.5rem;
 
   pointer-events: none;
-  background-color: var(--surface1);
+  background-color: var(--surface);
   border-radius: 0.5rem;
   opacity: 0;
 

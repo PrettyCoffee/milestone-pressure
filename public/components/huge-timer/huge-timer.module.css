@@ -18,8 +18,8 @@
 .label {
   margin: 0 auto;
   font-size: 0.3em;
-  color: var(--subtext0);
+  color: var(--muted);
   padding: 0 2rem 0.5rem 2rem;
-  border-bottom: 1px solid var(--overlay0);
+  border-bottom: 1px solid var(--muted);
   width: max-content;
 }

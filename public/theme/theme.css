@@ -25,6 +25,23 @@
   --pink: #f5c2e7;
   --flamingo: #f2cdcd;
   --rosewater: #f5e0dc;
+
+  --surface: var(--surface0);
+  --overlay: var(--surface2);
+  --muted: var(--overlay1);
+  
+  --orange: var(--maroon);
+  --amber: var(--peach);
+  --rose: var(--rosewater);
+  
+  /*
+  --base: var(--base);
+  --text: var(--text);
+  --blue: #89b4fa;
+  --green: #a6e3a1;
+  --red: #f38ba8;
+  --yellow: #f9e2af;
+  */
 }
 
 .latte {
@@ -54,6 +71,23 @@
   --pink: #ea76cb;
   --flamingo: #dd7878;
   --rosewater: #dc8a78;
+
+  --surface: var(--surface0);
+  --overlay: var(--surface2);
+  --muted: var(--overlay1);
+  
+  --orange: var(--maroon);
+  --amber: var(--peach);
+  --rose: var(--rosewater);
+  
+  /*
+  --base: var(--base);
+  --text: var(--text);
+  --blue: #89b4fa;
+  --green: #a6e3a1;
+  --red: #f38ba8;
+  --yellow: #f9e2af;
+  */
 }
 
 .frappe {
@@ -83,6 +117,23 @@
   --pink: #f4b8e4;
   --flamingo: #eebebe;
   --rosewater: #f2d5cf;
+
+  --surface: var(--surface0);
+  --overlay: var(--surface2);
+  --muted: var(--overlay1);
+  
+  --orange: var(--maroon);
+  --amber: var(--peach);
+  --rose: var(--rosewater);
+  
+  /*
+  --base: var(--base);
+  --text: var(--text);
+  --blue: #89b4fa;
+  --green: #a6e3a1;
+  --red: #f38ba8;
+  --yellow: #f9e2af;
+  */
 }
 
 .macchiato {
@@ -112,4 +163,42 @@
   --base: #24273a;
   --mantle: #1e2030;
   --crust: #181926;
+
+  --surface: var(--surface0);
+  --overlay: var(--surface2);
+  --muted: var(--overlay1);
+  
+  --orange: var(--maroon);
+  --amber: var(--peach);
+  --rose: var(--rosewater);
+  
+  /*
+  --base: var(--base);
+  --text: var(--text);
+  --blue: #89b4fa;
+  --green: #a6e3a1;
+  --red: #f38ba8;
+  --yellow: #f9e2af;
+  */
+}
+
+:root {
+  /** base background */
+  --base: #1e1e2e;
+  /** surfaces on the background (e.g. modal) */
+  --surface: #313244;
+  /** element backgrounds (e.g. button) */
+  --overlay: #585b70;
+  /** muted text (e.g. disabled text) */
+  --muted: #7f849c;
+  /** text */
+  --text: #cdd6f4;
+  
+  --blue: #89b4fa;
+  --green: #a6e3a1;
+  --red: #f38ba8;
+  --orange: #eba0ac;
+  --amber: #fab387;
+  --yellow: #f9e2af;
+  --rose: #f5e0dc;
 }

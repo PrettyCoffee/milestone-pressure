@@ -4,7 +4,7 @@
 }
 
 .delimiter {
-  color: var(--overlay0);
+  color: var(--muted);
   margin: 0 0.25em;
 }
 
