@@ -23,7 +23,6 @@ export const useTimer = ({ endDate, fps }: TimerOptions) => {
   })
 
   useEffect(() => {
-    console.log(endDate)
     // restart if date is changed
     start()
   }, [endDate, start])
