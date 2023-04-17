@@ -4,23 +4,16 @@
   flex-direction: column;
   align-items: end;
 
-  --transition: 0.5s;
-
-  height: 2rem;
-  width: 2rem;
-  transition: var(--transition);
+  --reveal-transition: 0.5s;
+  transition: var(--reveal-transition);
   transition-property: height, width, border-radius;
-}
-
-.wrapper:hover, .wrapper:focus-within {
-  height: 8rem;
 }
 
 .wrapper::before {
   content: "";
   position: absolute;
   inset: 0;
-  transition: var(--transition);
+  transition: var(--reveal-transition);
   transition-property: left, right, top, bottom, border-radius;
 }
 
@@ -34,41 +27,33 @@
   bottom: -3rem;
 }
 
-.wrapper button.themeOption {
+.wrapper:not(:hover):not(:focus-within) .themeOption:not(.current) {
   height: 0rem;
   opacity: 0;
-}
-
-.wrapper:hover button.themeOption, .wrapper:focus-within button.themeOption {
-  height: var(--radio-size);
-  opacity: 1;
 }
 
 .themeOption {
   --radio-size: 2rem;
   height: var(--radio-size);
   width: var(--radio-size);
+  position: relative;
 
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  transition: var(--transition);
+  transition: var(--reveal-transition);
   transition-property: height, opacity;
-}
-
-.themeOption[aria-checked="true"] {
-  border-radius: 50%;
-  outline: 8px solid var(--surface1);
-  outline-offset: -12px;
-}
-
-button.themeOption {
-  background-color: transparent;
-  border: none;
-  outline: none;
   cursor: pointer;
-  padding: 0;
+}
+  
+.themeOption.current::before {
+  content: "";
+  position: absolute;
+  inset: 0.25rem;
+
+  background-color: var(--surface1);
+  border-radius: 50%;
 }
 
 .bubbles {
@@ -88,7 +73,7 @@ button.themeOption {
   display: inline-block;
   height: var(--size);
   width: var(--size);
-  border-radius: 50vh;
+  border-radius: 50%;
   border: 0.125rem solid var(--surface1);
   
   position: absolute;
@@ -113,19 +98,19 @@ button.themeOption {
   top: calc(-0.75 * var(--size));
 }
 
-button.themeOption:hover > .bubbles > span:nth-of-type(1),
-button.themeOption:focus-visible > .bubbles > span:nth-of-type(1) {
+.themeOption:hover > .bubbles > span:nth-of-type(1),
+.themeOption > input:focus-visible + .bubbles > span:nth-of-type(1) {
   top: calc(-0.15 * var(--size));
   left: 0;
 }
 
-button.themeOption:hover > .bubbles > span:nth-of-type(2),
-button.themeOption:focus-visible > .bubbles > span:nth-of-type(2) {
+.themeOption:hover > .bubbles > span:nth-of-type(2),
+.themeOption > input:focus-visible + .bubbles > span:nth-of-type(2) {
   top: calc(-0.15 * var(--size));
   right: 0;
 }
 
-button.themeOption:hover > .bubbles > span:nth-of-type(3),
-button.themeOption:focus-visible > .bubbles > span:nth-of-type(3) {
+.themeOption:hover > .bubbles > span:nth-of-type(3),
+.themeOption > input:focus-visible + .bubbles > span:nth-of-type(3) {
   top: calc(-0.95 * var(--size));
 }
