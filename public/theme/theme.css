@@ -204,7 +204,7 @@
 }
 
 .nord.light {
-  --base: #fff;
+  --base: #ffffff;
   --surface: var(--nord6);
   --overlay: var(--nord4);
   --muted: #717886;
