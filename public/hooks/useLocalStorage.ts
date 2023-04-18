@@ -1,15 +1,17 @@
 import { useCallback, useState } from "preact/hooks"
 
+import { isPrerender } from "components/utils/isPrerender"
+
 const PREFIX = "miles-"
 
 const STORAGE = {
   setItem: <T>(key: string, value: T) => {
-    if (typeof window === "undefined") return
+    if (isPrerender()) return
     window.localStorage.setItem(key, JSON.stringify(value))
   },
 
   getItem: <T>(key: string) => {
-    if (typeof window === "undefined") return null
+    if (isPrerender()) return null
 
     const stringValue = window.localStorage.getItem(key)
     if (stringValue == null) return null

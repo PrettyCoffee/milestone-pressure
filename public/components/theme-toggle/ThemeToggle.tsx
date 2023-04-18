@@ -2,6 +2,7 @@ import { useId, useMemo } from "preact/hooks"
 
 import styles from "./theme-toggle.module.css"
 import { ThemeInput } from "./ThemeInput"
+import { isPrerender } from "../utils/isPrerender"
 
 const hexToNumber = (hex: string) => Number(`0x${hex}`)
 
@@ -12,7 +13,7 @@ const splitHexColor = ([, ...hex]: string) => ({
 })
 
 const getThemeVarValue = (theme: string, varName: string) => {
-  if (typeof document === "undefined") return "#ffffff"
+  if (isPrerender()) return "#ffffff"
 
   const span = document.createElement("span")
   span.className = theme
@@ -32,8 +33,6 @@ const sortByLightness = (themes: string[]) => {
       weight: hexToNumber(r) + hexToNumber(g) + hexToNumber(b),
     }
   })
-
-  console.log(withWeight)
 
   return withWeight
     .sort((a, b) => (a.weight > b.weight ? 1 : -1))
@@ -56,7 +55,7 @@ export const ThemeToggle = ({
 
   const sortedOptions = useMemo(() => sortByLightness(options), [options])
 
-  return (
+  return isPrerender() ? null : (
     <div className={styles.themeTogglePosition}>
       <label id={labelId} className="visually-hidden">
         Select a theme
