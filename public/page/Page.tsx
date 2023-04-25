@@ -4,6 +4,8 @@ import { HugeTimer, MilestoneTable, ThemeToggle } from "components"
 import { Milestone } from "components/milestone-table/MilestoneTable"
 import { useLocalStorage } from "hooks"
 
+import { data } from "./data"
+
 const getCurrentMilestone = (milestones: Milestone[]) =>
   milestones.find(({ deadline, start }) => {
     const now = Date.now()
@@ -40,7 +42,7 @@ const useCurrentMilestone = (milestones: Milestone[]) => {
     [current?.id, milestones]
   )
 
-  return { current, data }
+  return { current, milestones: data }
 }
 
 const themes = [
@@ -51,10 +53,7 @@ const themes = [
   "nord light",
 ]
 
-interface PageProps {
-  milestones: Omit<Milestone, "current">[]
-}
-export const Page = ({ milestones }: PageProps) => {
+export const Page = () => {
   const [theme, setTheme] = useLocalStorage("theme", themes[0])
 
   useEffect(() => {
@@ -68,7 +67,7 @@ export const Page = ({ milestones }: PageProps) => {
 
   const tableData = useMemo(
     () =>
-      milestones.map(({ deadline, id, ...rest }) => ({
+      data.map(({ deadline, id, ...rest }) => ({
         ...rest,
         id,
         deadline: new Date(deadline),
@@ -77,7 +76,7 @@ export const Page = ({ milestones }: PageProps) => {
     []
   )
 
-  const { current, data } = useCurrentMilestone(tableData)
+  const { current, milestones } = useCurrentMilestone(tableData)
 
   return (
     <div className="app">
@@ -86,7 +85,7 @@ export const Page = ({ milestones }: PageProps) => {
         endDate={current?.deadline ?? new Date("")}
       />
       <div className="main">
-        <MilestoneTable milestones={data} />
+        <MilestoneTable milestones={milestones} />
       </div>
       <ThemeToggle current={theme} options={themes} onChange={setTheme} />
     </div>
