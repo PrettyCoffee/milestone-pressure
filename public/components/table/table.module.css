@@ -31,7 +31,6 @@
 
 .body .row:hover {
   --transition: 0.125s;
-  transform: scale(1.05);
 }
 
 .body .row::after {

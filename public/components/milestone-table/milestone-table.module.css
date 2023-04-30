@@ -96,11 +96,20 @@
   inset: 0;
   display: inline-block;
   margin: auto;
-  width: 1.25rem;
-  height: 1.25rem;
   border-radius: 50%;
   background-color: var(--base);
   border: var(--status-border);
+  
+  --circle-size: 1.25rem;
+  width: var(--circle-size);
+  height: var(--circle-size);
+
+  transition: var(--transition); /* set in table */
+  transition-property: width, height;
+}
+
+[role="row"]:hover .timeline::after{
+  --circle-size: 1.5rem;
 }
 
 .timeline svg {
