@@ -5,6 +5,7 @@
   --status: var(--muted);
 
   --status-border: 0.125rem solid var(--status);
+  --border-radius: 0.3rem;
 }
 
 [role="row"][data-status="current"] .timeline,
@@ -47,7 +48,7 @@
   z-index: 0;
   border-bottom: var(--status-border);
   border-right: var(--status-border);
-  border-bottom-right-radius: 0.25rem;
+  border-bottom-right-radius: var(--border-radius);
 }
 
 .timeline > .statusLine:nth-of-type(1) {
@@ -73,7 +74,7 @@
   background: transparent;
   border-top: var(--status-border);
   border-left: var(--status-border);
-  border-top-left-radius: 0.25rem;
+  border-top-left-radius: var(--border-radius);
 }
 
 .table [data-row-type="branch"] .timeline > .statusLine:nth-of-type(2) {
@@ -87,7 +88,7 @@
 
   border-top: var(--status-border);
   border-right: var(--status-border);
-  border-top-right-radius: 0.25rem;
+  border-top-right-radius: var(--border-radius);
 }
 
 .timeline::after {
