@@ -7,11 +7,12 @@
   --status-border: 0.125rem solid var(--status);
 }
 
-.timeline[data-status="current"] {
+[role="row"][data-status="current"] .timeline,
+[role="row"][data-status="inProgress"] .timeline {
   --status: var(--blue);
 }
 
-.timeline[data-status="finished"] {
+[role="row"][data-status="finished"] .timeline {
   --status: var(--green);
 }
 
@@ -109,11 +110,11 @@
   color: var(--status);
 }
 
-.table :global [role="row"].finished {
+.table [role="row"][data-status="finished"] {
   opacity: 0.5;
 }
 
-.table :global [role="row"].current::after {
+.table [role="row"][data-status="current"][data-row-type="leaf"]::after {
   outline: 0.125rem solid var(--surface);
   outline-offset: 0.125rem;
 }

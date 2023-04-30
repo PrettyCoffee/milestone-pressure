@@ -5,16 +5,22 @@ import { useLocalStorage } from "hooks"
 
 import { data, MilestoneNode, MilestoneLeaf, MilestoneGroup } from "./data"
 
-export type NodeStatus = "finished" | "current" | "running" | "none"
+export type NodeStatus = "finished" | "current" | "inProgress" | "none"
 export type NodeWithStatus = MilestoneNode<{
   status: NodeStatus
 }>
 
-const isRunning = ({ deadline, start = new Date(0) }: MilestoneLeaf) => {
+const isInProgress = (
+  [start, end]: [Date | undefined, Date | undefined],
+  fallback = false
+) => {
+  if (!start || !end) return fallback
+
   const now = Date.now()
-  const isNotFinished = deadline.valueOf() - now > 0
-  const startIsPassed = start.valueOf() - now <= 0
-  return isNotFinished && startIsPassed
+  const didStart = start.valueOf() - now <= 0
+  const isNotFinished = end.valueOf() - now > 0
+
+  return isNotFinished && didStart && start.valueOf() !== 0
 }
 
 const isFinished = ({ deadline }: MilestoneLeaf) => {
@@ -22,27 +28,27 @@ const isFinished = ({ deadline }: MilestoneLeaf) => {
   return deadline.valueOf() - now <= 0
 }
 
-const getStatus = (milestone: MilestoneLeaf, current: MilestoneLeaf | null) => {
-  const running = isRunning(milestone)
-  const isCurrent = !current && running
+const getStatus = (
+  milestone: MilestoneLeaf,
+  current: MilestoneLeaf | null
+): NodeStatus => {
+  const inProgress = isInProgress([milestone.start, milestone.deadline])
   const finished = isFinished(milestone)
-  const status: NodeStatus = isCurrent
-    ? "current"
-    : running
-    ? "running"
-    : finished
+  const isCurrent = !current && !finished
+
+  return finished
     ? "finished"
+    : isCurrent
+    ? "current"
+    : inProgress
+    ? "inProgress"
     : "none"
-  return {
-    status,
-    current: isCurrent ? milestone : current,
-  }
 }
 
 const combineStatus = (...args: NodeStatus[]): NodeStatus => {
-  if (args.includes("current")) return "current"
-  if (args.includes("running")) return "running"
   if (args.includes("finished")) return "finished"
+  if (args.includes("current")) return "current"
+  if (args.includes("inProgress")) return "inProgress"
   return "none"
 }
 
@@ -51,14 +57,19 @@ interface Result {
   status: NodeStatus
   milestones: NodeWithStatus[]
 }
-const getNodesWithStatus = (nodes: MilestoneNode[]): Result => {
+const getNodesWithStatus = (
+  nodes: MilestoneNode[],
+  current: MilestoneLeaf | null = null
+): Result => {
   const addGroupWithStatus = (
     result: Result,
     { id, label, items }: MilestoneGroup
   ): Result => {
-    const inner = getNodesWithStatus(items)
+    const inner = getNodesWithStatus(items, result.current)
+    const current = result.current ?? inner.current
+
     return {
-      current: result.current ?? inner.current,
+      current,
       status: inner.status,
       milestones: [
         ...result.milestones,
@@ -73,7 +84,13 @@ const getNodesWithStatus = (nodes: MilestoneNode[]): Result => {
   }
 
   const addLeafWithStatus = (result: Result, leaf: MilestoneLeaf): Result => {
-    const { current, status } = getStatus(leaf, result.current)
+    const status = getStatus(leaf, result.current)
+    const current = result.current
+      ? result.current
+      : status === "current"
+      ? leaf
+      : null
+
     return {
       current,
       status: combineStatus(result.status, status),
@@ -86,13 +103,14 @@ const getNodesWithStatus = (nodes: MilestoneNode[]): Result => {
       if ("items" in node) return addGroupWithStatus(result, node)
       return addLeafWithStatus(result, node)
     },
-    { current: null, milestones: [], status: "none" }
+    { current, milestones: [], status: "none" }
   )
 }
 
 const useCurrentMilestone = (milestones: MilestoneNode[]) => {
   const [result, setResult] = useState(getNodesWithStatus(milestones))
   const timeout = useRef<NodeJS.Timeout>()
+  const last = useRef<MilestoneLeaf | null>()
 
   const updateCurrent = useCallback(() => {
     setResult(getNodesWithStatus(milestones))
@@ -100,11 +118,13 @@ const useCurrentMilestone = (milestones: MilestoneNode[]) => {
 
   useEffect(() => {
     const { deadline } = result.current ?? {}
-    if (deadline)
+    if (deadline && last.current !== result.current) {
+      last.current = result.current
       timeout.current = setTimeout(
         updateCurrent,
         deadline.valueOf() - Date.now()
       )
+    }
 
     return () => clearTimeout(timeout.current)
   }, [result, updateCurrent])

@@ -6,26 +6,14 @@ import { Check, Icon, IconDefinition, Crosshair } from "components/icon"
 import { Table } from "components/table"
 import { Timer } from "components/timer"
 import { useTimer } from "hooks"
+import { MilestoneLeaf } from "page/data"
 import { NodeStatus, NodeWithStatus } from "page/Page"
 
 import styles from "./milestone-table.module.css"
 
-export interface Milestone {
-  id: string
-  deadline: Date
+export interface Milestone extends MilestoneLeaf {
   start: Date
-  label: string
-  current: boolean
-}
-const isInProgress = ([start, end]: [Date, Date], fallback = false) => {
-  const now = Date.now()
-  const didStart = start.valueOf() - now <= 0
-  const isNotFinished = end.valueOf() - now > 0
-
-  return (
-    (isNotFinished && didStart && start.valueOf() !== 0) ||
-    (start.valueOf() === 0 && fallback) // if start was not defined, use the fallback
-  )
+  status: NodeStatus
 }
 
 interface TableData {
@@ -42,12 +30,7 @@ const parseDate = (date: Date) =>
     day: "2-digit",
   })
 
-const useMilestone = ({
-  label,
-  deadline,
-  start,
-  current,
-}: Milestone): TableData => {
+const useMilestone = ({ label, deadline, status }: Milestone): TableData => {
   const date = useMemo(() => parseDate(deadline), [deadline])
 
   const timeLeft = useTimer({
@@ -55,10 +38,8 @@ const useMilestone = ({
     fps: 1,
   })
 
-  const inProgress = isInProgress([start, deadline], current)
-
   return {
-    status: timeLeft <= 0 ? "finished" : inProgress ? "current" : "none",
+    status,
     label,
     timeLeft,
     deadline: date,
@@ -67,7 +48,7 @@ const useMilestone = ({
 
 const statusIcon: Record<TableData["status"], IconDefinition | undefined> = {
   current: Crosshair,
-  running: Crosshair,
+  inProgress: Crosshair,
   finished: Check,
   none: undefined,
 }
@@ -133,17 +114,12 @@ const MilestoneRow = ({
 }) => {
   const { status, label, timeLeft, deadline } = useMilestone(props)
 
-  const classNames = []
-  if (status === "finished") classNames.push("finished")
-  // eslint-disable-next-line react/destructuring-assignment
-  if (props.current) classNames.push("current")
-
   return (
     <Table.Row
+      data-status={status}
       data-has-parent={level !== 0}
       data-row-type="leaf"
       data-group-end={groupEnd}
-      className={classNames.join(" ")}
     >
       <StatusCell
         groupEnd={groupEnd}
@@ -166,7 +142,7 @@ const GroupRow = ({
   label,
 }: NodeWithStatus & { level: number }) => (
   <Table.Row
-    className={status === "finished" ? "finished" : ""}
+    data-status={status}
     data-has-parent={level !== 0}
     data-row-type="branch"
   >
@@ -211,12 +187,11 @@ const Rows = ({ nodes, level = 0, groupEndLevels = 0 }: RowsProps) => {
         return (
           <MilestoneRow
             key={node.id}
-            groupEnd={groupEnd}
-            current={node.status === "current"}
-            start={node.start ?? new Date(0)}
             level={level}
+            groupEnd={groupEnd}
             groupEndLevels={groupEndLevels}
             {...node}
+            start={node.start ?? new Date(0)}
           />
         )
       })}
