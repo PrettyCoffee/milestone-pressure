@@ -2,14 +2,14 @@ import { Fragment } from "preact"
 
 import { useMemo, useState } from "preact/hooks"
 
-import { Check, Icon, IconDefinition, Crosshair } from "components/icon"
-import { Table } from "components/table"
-import { Timer } from "components/timer"
 import { useTimer } from "hooks"
 import { MilestoneLeaf } from "page/data"
 import { NodeStatus, NodeWithStatus } from "page/Page"
 
 import styles from "./milestone-table.module.css"
+import { Check, Icon, IconDefinition, Circle, Play } from "../icon"
+import { Table } from "../table"
+import { Timer } from "../timer"
 
 export interface Milestone extends MilestoneLeaf {
   start: Date
@@ -47,8 +47,8 @@ const useMilestone = ({ label, deadline, status }: Milestone): TableData => {
 }
 
 const statusIcon: Record<TableData["status"], IconDefinition | undefined> = {
-  current: Crosshair,
-  inProgress: Crosshair,
+  current: Play,
+  inProgress: Circle,
   finished: Check,
   none: undefined,
 }
