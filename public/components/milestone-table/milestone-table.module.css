@@ -3,36 +3,89 @@
   width: var(--row-height);
   height: var(--row-height);
   --status: var(--muted);
+
+  --status-border: 0.125rem solid var(--status);
 }
 
 .timeline[data-status="current"] {
   --status: var(--blue);
 }
 
-.timeline[data-status="success"] {
+.timeline[data-status="finished"] {
   --status: var(--green);
 }
-.timeline[data-status="failed"] {
-  --status: var(--red);
-}
 
-.timeline::before {
-  content: "";
+.timeline > .statusLine {
   position: absolute;
-  inset: 0;
+  inset: auto 0;
+  height: 50%;
   display: inline-block;
   margin: 0 auto;
-  width: 2px;
+  width: 0.125rem;
   background-color: var(--status);
   z-index: 0;
 }
-
-.table [role="row"]:first-of-type .timeline::before {
-  top: 50%;
+.idleLine {
+  position: absolute;
+  height: 100%;
+  inset: 0 auto;
+  display: inline-block;
+  border: 0.075rem dashed var(--muted);
+  opacity: 0.5;
 }
 
-.table [role="row"]:last-of-type .timeline::before {
-  bottom: 50%;
+.groupEndLine {
+  content: "";
+  position: absolute;
+  bottom: -0.1875rem;
+  right: calc(50% - 0.075rem);
+  display: inline-block;
+  width: 22.5%;
+  height: 0.75rem;
+  z-index: 0;
+  border-bottom: var(--status-border);
+  border-right: var(--status-border);
+  border-bottom-right-radius: 0.25rem;
+}
+
+.timeline > .statusLine:nth-of-type(1) {
+  top: 0;
+}
+.timeline > .statusLine:nth-of-type(2) {
+  bottom: 0;
+}
+
+.table [role="row"]:first-of-type .timeline > .statusLine:nth-of-type(1),
+.table [role="row"]:last-of-type .timeline > .statusLine:nth-of-type(2) {
+  display: none;
+}
+
+[data-group-end="true"] + * .timeline > .statusLine:nth-of-type(1) {
+  position: absolute;
+  top: -0.1875rem;
+  left: 0.325rem;
+  display: inline-block;
+  width: 22.5%;
+  height: 0.75rem;
+  z-index: 0;
+  background: transparent;
+  border-top: var(--status-border);
+  border-left: var(--status-border);
+  border-top-left-radius: 0.25rem;
+}
+
+.table [data-row-type="branch"] .timeline > .statusLine:nth-of-type(2) {
+  transform: none;
+  width: 1rem;
+  height: calc(50% + 0.075rem);
+  top: calc(50% - 0.075rem);
+  right: -1.125rem;
+  background-color: transparent;
+  z-index: 0;
+
+  border-top: var(--status-border);
+  border-right: var(--status-border);
+  border-top-right-radius: 0.25rem;
 }
 
 .timeline::after {
@@ -45,7 +98,7 @@
   height: 1.25rem;
   border-radius: 50%;
   background-color: var(--base);
-  border: 0.125rem solid var(--status);
+  border: var(--status-border);
 }
 
 .timeline svg {

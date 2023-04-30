@@ -1,48 +1,115 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks"
+import { useCallback, useEffect, useRef, useState } from "preact/hooks"
 
 import { HugeTimer, MilestoneTable, ThemeToggle } from "components"
-import { Milestone } from "components/milestone-table/MilestoneTable"
 import { useLocalStorage } from "hooks"
 
-import { data } from "./data"
+import { data, MilestoneNode, MilestoneLeaf, MilestoneGroup } from "./data"
 
-const getCurrentMilestone = (milestones: Milestone[]) =>
-  milestones.find(({ deadline, start }) => {
-    const now = Date.now()
-    const isNotFinished = deadline.valueOf() - now > 0
-    const startIsPassed = start.valueOf() - now <= 0
-    return isNotFinished && startIsPassed
-  })
+export type NodeStatus = "finished" | "current" | "running" | "none"
+export type NodeWithStatus = MilestoneNode<{
+  status: NodeStatus
+}>
 
-const useCurrentMilestone = (milestones: Milestone[]) => {
-  const [current, setCurrent] = useState(getCurrentMilestone(milestones))
+const isRunning = ({ deadline, start = new Date(0) }: MilestoneLeaf) => {
+  const now = Date.now()
+  const isNotFinished = deadline.valueOf() - now > 0
+  const startIsPassed = start.valueOf() - now <= 0
+  return isNotFinished && startIsPassed
+}
+
+const isFinished = ({ deadline }: MilestoneLeaf) => {
+  const now = Date.now()
+  return deadline.valueOf() - now <= 0
+}
+
+const getStatus = (milestone: MilestoneLeaf, current: MilestoneLeaf | null) => {
+  const running = isRunning(milestone)
+  const isCurrent = !current && running
+  const finished = isFinished(milestone)
+  const status: NodeStatus = isCurrent
+    ? "current"
+    : running
+    ? "running"
+    : finished
+    ? "finished"
+    : "none"
+  return {
+    status,
+    current: isCurrent ? milestone : current,
+  }
+}
+
+const combineStatus = (...args: NodeStatus[]): NodeStatus => {
+  if (args.includes("current")) return "current"
+  if (args.includes("running")) return "running"
+  if (args.includes("finished")) return "finished"
+  return "none"
+}
+
+interface Result {
+  current: MilestoneLeaf | null
+  status: NodeStatus
+  milestones: NodeWithStatus[]
+}
+const getNodesWithStatus = (nodes: MilestoneNode[]): Result => {
+  const addGroupWithStatus = (
+    result: Result,
+    { id, label, items }: MilestoneGroup
+  ): Result => {
+    const inner = getNodesWithStatus(items)
+    return {
+      current: result.current ?? inner.current,
+      status: inner.status,
+      milestones: [
+        ...result.milestones,
+        {
+          id,
+          label,
+          items: inner.milestones,
+          status: inner.status,
+        },
+      ],
+    }
+  }
+
+  const addLeafWithStatus = (result: Result, leaf: MilestoneLeaf): Result => {
+    const { current, status } = getStatus(leaf, result.current)
+    return {
+      current,
+      status: combineStatus(result.status, status),
+      milestones: [...result.milestones, { ...leaf, status }],
+    }
+  }
+
+  return nodes.reduce<Result>(
+    (result, node) => {
+      if ("items" in node) return addGroupWithStatus(result, node)
+      return addLeafWithStatus(result, node)
+    },
+    { current: null, milestones: [], status: "none" }
+  )
+}
+
+const useCurrentMilestone = (milestones: MilestoneNode[]) => {
+  const [result, setResult] = useState(getNodesWithStatus(milestones))
   const timeout = useRef<NodeJS.Timeout>()
 
   const updateCurrent = useCallback(() => {
-    setCurrent(getCurrentMilestone(milestones))
+    setResult(getNodesWithStatus(milestones))
   }, [milestones])
 
   useEffect(() => {
-    if (current?.deadline)
+    const { deadline } = result.current ?? {}
+    if (deadline)
       timeout.current = setTimeout(
         updateCurrent,
-        current.deadline.valueOf() - Date.now()
+        deadline.valueOf() - Date.now()
       )
 
     return () => clearTimeout(timeout.current)
-  }, [current?.deadline, updateCurrent])
+  }, [result, updateCurrent])
 
-  const data = useMemo(
-    () =>
-      milestones.map(milestone =>
-        milestone.id === current?.id
-          ? { ...milestone, current: true }
-          : { ...milestone, current: false }
-      ),
-    [current?.id, milestones]
-  )
-
-  return { current, milestones: data }
+  return { current: result.current, milestones: result.milestones }
 }
 
 const themes = [
@@ -65,18 +132,7 @@ export const Page = () => {
       })
   }, [theme])
 
-  const tableData = useMemo(
-    () =>
-      data.map(({ deadline, id, ...rest }) => ({
-        ...rest,
-        id,
-        deadline: new Date(deadline),
-        current: false,
-      })),
-    []
-  )
-
-  const { current, milestones } = useCurrentMilestone(tableData)
+  const { current, milestones } = useCurrentMilestone(data)
 
   return (
     <div className="app">

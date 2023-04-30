@@ -1,34 +1,81 @@
 [
   {
     "id": "1",
-    "deadline": "2023-03-23T00:00:00",
+    "deadline": "2023-04-23T00:00:00",
     "label": "Kickoff"
   },
   {
     "id": "2",
-    "deadline": "2023-04-15T00:00:00",
-    "label": "Code things"
+    "label": "Code Things",
+    "items": [
+      {
+        "id": "2.1",
+        "deadline": "2023-04-29T00:00:00",
+        "label": "Create counter"
+      },
+      {
+        "id": "2.2",
+        "label": "Create milestone table",
+        "items": [
+          {
+            "id": "2.2.1",
+            "deadline": "2023-04-29T00:00:00",
+            "label": "Create generic table"
+          },
+          {
+            "id": "2.2.2",
+            "deadline": "2023-04-30T00:00:00",
+            "label": "Create milestone table"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "3",
-    "start": "2023-04-13T00:00:00",
-    "deadline": "2023-04-20T00:00:00",
-    "label": "Write docs"
+    "label": "Write Docs",
+    "items": [
+      {
+        "id": "3.1",
+        "start": "2023-04-30T00:00:00",
+        "deadline": "2023-05-01T00:00:00",
+        "label": "Write Code Documentation"
+      },
+      {
+        "id": "3.2",
+        "start": "2023-05-02T00:00:00",
+        "deadline": "2023-05-03T00:00:00",
+        "label": "Write Thesis"
+      }
+    ]
   },
   {
     "id": "4",
-    "start": "2023-04-14T12:00:00",
-    "deadline": "2023-04-23T00:00:00",
-    "label": "Create presentation"
+    "start": "2023-05-14T12:00:00",
+    "deadline": "2023-05-23T00:00:00",
+    "label": "Create Presentation"
   },
   {
     "id": "5",
-    "deadline": "2023-04-23T00:00:00",
-    "label": "Hand in thesis"
+    "label": "Thesis Submission",
+    "items": [
+      {
+        "id": "5.1",
+        "start": "2023-05-22T00:00:00",
+        "deadline": "2023-05-23T00:00:00",
+        "label": "Create Printouts"
+      },
+      {
+        "id": "5.2.2.2",
+        "start": "2023-05-23T00:00:00",
+        "deadline": "2023-05-24T16:00:00",
+        "label": "Hand In"
+      }
+    ]
   },
   {
     "id": "6",
-    "deadline": "2023-04-30T00:00:00",
+    "deadline": "2023-05-30T00:00:00",
     "label": "Presentation"
   }
 ]
