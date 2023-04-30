@@ -2,7 +2,10 @@ import styles from "./table.module.css"
 import { PropsWithChildren } from "../utils/baseProps"
 import { joinClassNames } from "../utils/joinClassNames"
 
-type GenericProps = PropsWithChildren<{ className?: string }>
+type GenericProps = PropsWithChildren<{
+  className?: string
+  style?: JSX.CSSProperties
+}>
 
 interface CellProps {
   header?: boolean
@@ -13,6 +16,7 @@ const Cell = ({
   className,
   header = false,
   align = "start",
+  style = {},
   ...props
 }: GenericProps & CellProps) => (
   <div
@@ -20,6 +24,7 @@ const Cell = ({
     className={joinClassNames(styles.cell, className)}
     style={{
       textAlign: align,
+      ...style,
     }}
     {...props}
   />
