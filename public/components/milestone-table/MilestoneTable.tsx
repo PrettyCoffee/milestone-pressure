@@ -72,7 +72,7 @@ const StatusCell = ({
           <span
             key={index}
             className={styles.idleLine}
-            style={{ left: `${index + 1.2}rem` }}
+            style={{ "--index": index }}
           />
         ))}
         <div className={styles.timeline} data-status={status}>
@@ -81,7 +81,7 @@ const StatusCell = ({
           {groupEnd ? (
             <span
               className={styles.groupEndLine}
-              style={{ width: `${groupEndLevels + 0.425}rem` }}
+              style={{ "--groupEndLevels": groupEndLevels }}
             />
           ) : (
             <span className={styles.statusLine} />
@@ -117,6 +117,7 @@ const MilestoneRow = ({
       data-has-parent={level !== 0}
       data-row-type="leaf"
       data-group-end={groupEnd}
+      style={{ "--level": level }}
     >
       <StatusCell
         groupEnd={groupEnd}
@@ -142,6 +143,7 @@ const GroupRow = ({
     data-status={status}
     data-has-parent={level !== 0}
     data-row-type="branch"
+    style={{ "--level": level }}
   >
     <StatusCell
       groupEnd={false}

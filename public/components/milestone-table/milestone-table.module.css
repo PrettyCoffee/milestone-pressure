@@ -28,8 +28,9 @@
 }
 .idleLine {
   position: absolute;
-  height: 100%;
   inset: 0 auto;
+  left: calc(var(--index) * 1rem + 1.2rem);
+  height: 100%;
   display: inline-block;
   border: 0.075rem dashed var(--muted);
   opacity: 0.5;
@@ -41,7 +42,7 @@
   bottom: -0.1875rem;
   right: calc(50% - 0.075rem);
   display: inline-block;
-  width: 22.5%;
+  width: calc(var(--groupEndLevels) * 1rem + 0.425rem);
   height: 0.75rem;
   z-index: 0;
   border-bottom: var(--status-border);
