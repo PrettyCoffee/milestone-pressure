@@ -67,12 +67,12 @@ const StatusCell = ({
   const icon = statusIcon[status]
   return (
     <Table.Cell align="center">
-      <div style={{ paddingLeft: `calc(${level} * 1rem)` }}>
+      <div style={{ paddingLeft: `${level}rem` }}>
         {Array.from({ length: level }, (_, index) => (
           <span
             key={index}
             className={styles.idleLine}
-            style={{ left: `calc(${index + 1} * 1rem + 0.2rem)` }}
+            style={{ left: `${index + 1.2}rem` }}
           />
         ))}
         <div className={styles.timeline} data-status={status}>
@@ -94,12 +94,9 @@ const StatusCell = ({
 
 interface LabelCellProps {
   label: string
-  level: number
 }
-const LabelCell = ({ level, label }: LabelCellProps) => (
-  <Table.Cell align="start">
-    <div style={{ paddingLeft: `calc(${level} * 0rem)` }}>{label}</div>
-  </Table.Cell>
+const LabelCell = ({ label }: LabelCellProps) => (
+  <Table.Cell align="start">{label}</Table.Cell>
 )
 
 const MilestoneRow = ({
@@ -127,7 +124,7 @@ const MilestoneRow = ({
         level={level}
         status={status}
       />
-      <LabelCell level={level} label={label} />
+      <LabelCell label={label} />
       <Table.Cell align="center">{deadline}</Table.Cell>
       <Table.Cell align="end">
         {timeLeft > 0 ? <Timer time={timeLeft} style="short" /> : "-"}
@@ -152,7 +149,7 @@ const GroupRow = ({
       level={level}
       status={status}
     />
-    <LabelCell level={level} label={label} />
+    <LabelCell label={label} />
     <Table.Cell />
     <Table.Cell />
   </Table.Row>
