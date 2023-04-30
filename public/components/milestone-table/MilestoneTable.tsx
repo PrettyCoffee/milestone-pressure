@@ -153,8 +153,8 @@ const GroupRow = ({
       status={status}
     />
     <LabelCell level={level} label={label} />
-    <Table.Cell>{""}</Table.Cell>
-    <Table.Cell>{""}</Table.Cell>
+    <Table.Cell />
+    <Table.Cell />
   </Table.Row>
 )
 
