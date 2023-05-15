@@ -116,7 +116,7 @@ const MilestoneRow = ({
       data-status={status}
       data-has-parent={level !== 0}
       data-row-type="leaf"
-      data-group-end={groupEnd}
+      data-group-end={groupEnd ? "true" : undefined}
       style={{ "--level": level }}
     >
       <StatusCell
