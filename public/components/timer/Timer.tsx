@@ -1,3 +1,5 @@
+import { isPrerender } from "components/utils/isPrerender"
+
 import { getDateSegments, DateSegmentName } from "./getDateSegments"
 import styles from "./timer.module.css"
 
@@ -64,6 +66,8 @@ export const Timer = ({
   className = "",
 }: TimerProps) => {
   const { days, hours, minutes, seconds, milliseconds } = getDateSegments(time)
+
+  if (isPrerender()) return null
 
   if (style === "short")
     return (
