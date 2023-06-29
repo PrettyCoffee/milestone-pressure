@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "preact/hooks"
 import { HugeTimer, MilestoneTable, ThemeToggle } from "components"
 import { useLocalStorage } from "hooks"
 
-import { data, MilestoneNode, MilestoneLeaf, MilestoneGroup } from "./data"
+import { MilestoneNode, MilestoneLeaf, MilestoneGroup, data } from "./data"
 
 export type NodeStatus = "finished" | "current" | "inProgress" | "none"
 export type NodeWithStatus = MilestoneNode<{
@@ -59,13 +59,15 @@ interface Result {
 }
 const getNodesWithStatus = (
   nodes: MilestoneNode[],
-  current: MilestoneLeaf | null = null
+  current: MilestoneLeaf | null = null,
+  isLast?: boolean
 ): Result => {
   const addGroupWithStatus = (
     result: Result,
-    { id, label, items }: MilestoneGroup
+    { id, label, items }: MilestoneGroup,
+    isLast?: boolean
   ): Result => {
-    const inner = getNodesWithStatus(items, result.current)
+    const inner = getNodesWithStatus(items, result.current, isLast)
     const current = result.current ?? inner.current
 
     return {
@@ -83,11 +85,15 @@ const getNodesWithStatus = (
     }
   }
 
-  const addLeafWithStatus = (result: Result, leaf: MilestoneLeaf): Result => {
+  const addLeafWithStatus = (
+    result: Result,
+    leaf: MilestoneLeaf,
+    isLast?: boolean
+  ): Result => {
     const status = getStatus(leaf, result.current)
     const current = result.current
       ? result.current
-      : status === "current"
+      : status === "current" || isLast
       ? leaf
       : null
 
@@ -99,9 +105,12 @@ const getNodesWithStatus = (
   }
 
   return nodes.reduce<Result>(
-    (result, node) => {
-      if ("items" in node) return addGroupWithStatus(result, node)
-      return addLeafWithStatus(result, node)
+    (result, node, index) => {
+      const isLastInNodes =
+        isLast || (isLast === undefined && nodes.length === index + 1)
+      if ("items" in node)
+        return addGroupWithStatus(result, node, isLastInNodes)
+      return addLeafWithStatus(result, node, isLastInNodes)
     },
     { current, milestones: [], status: "none" }
   )
